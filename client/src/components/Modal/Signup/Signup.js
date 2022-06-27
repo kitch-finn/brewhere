@@ -128,7 +128,7 @@ function Signup() {
   const onSubmit = () => {
     axios
       .post(
-        'http://localhost:8080/users/signup',
+        `${process.env.REACT_APP_API_URL}/users/signup`,
         { userName: username, userEmail: useremail, password: password },
         {
           headers: { 'Content-Type': 'application/json' },

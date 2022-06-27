@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import logo from '../../Landing/img/logo_x05_square.png';
 import styled from 'styled-components';
 import SignupModal from '../Signup/Signup';
@@ -67,11 +66,10 @@ function Login({ setUserinfo }) {
 
   const isAuthenticated = () => {
     axios
-      .get('http://localhost:8080/users/auth', {
+      .get(`${process.env.REACT_APP_API_URL}/users/auth`, {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res);
         setIsLogin(true);
         setUserinfo(res);
       });
@@ -100,10 +98,10 @@ function Login({ setUserinfo }) {
 
   const onClickSubmit = () => {
     const { userEmail, password } = loginInfo;
-    if (!userEmail || !password) {
-      setErrorMessage('이메일과 비밀번호를 확인하세요');
-      return;
-    }
+    // if (!userEmail || !password) {
+    //   setErrorMessage('이메일과 비밀번호를 확인하세요');
+    //   return;
+    // }
     axios
       .post(
         'http://localhost:8080/users/login',
@@ -116,14 +114,13 @@ function Login({ setUserinfo }) {
       .then((res) => {
         handleResponseSuccess();
         openModalHandler();
-        setLoginConfirmOpen(true);
-        setUserinfos(userEmail, password);
+        setUserinfo(userEmail, password);
       });
   };
 
   const handleLogout = () => {
     axios
-      .get('http://localhost:8080/users/logout', {
+      .get(`${process.env.REACT_APP_API_URL}/users/logout`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
