@@ -10,7 +10,7 @@
 
 와인을 사랑하는 사람들은 말합니다. "모든 사람은 저마다 자신만을 위한 와인을 가지고 있다. 다만, 아직 찾지 못했을 뿐이다."
 
-당신의 인중을 적셔줄 인생 맥주를 찾아 나서는 길, 맥덕과 함께 Brewhere에서 함께 할 수 있습니다.
+당신의 인중을 거품으로 적셔줄 인생 맥주를 찾아 나서는 길, 맥덕과 함께 Brewhere에서 함께 할 수 있습니다.
 
 
 [More in Wiki!](https://github.com/codestates/Brewhere/wiki)
@@ -19,7 +19,6 @@
 
 - Brewhere 에 연동 되어있는 지도를 활용해 서울의 개성있는 브루어리들을 찾을 수 있습니다.
 - 추천 검색어 기능을 활용해 입에 익지만, 이름과 종류를 알지 못했던 맥주들을 찾을 수 있습니다.
-- 좋아요 기능을 통해, 내가 찾아 봤던 브루어리를 마이페이지에서 다시 확인할 수 있습니다.
 
 ## Tech Skills
 
@@ -45,14 +44,14 @@
 
 - Position: Front-end
 - Stack : JavaScript, React.js, Styled-Component
-- main kick: 좋아요 기능으로 한번에 모아볼 수 있는 브루어리 리스트업
+- main kick: 카카오맵 api를 활용한 브루어리 위치 찾기
 
 ### 박선교 
 
 - Position: Front-end
 - Stack : JavaScript, React.js, Styled-Component
-- main kick: 좋아요 기능으로 한번에 모아볼 수 있는 브루어리 리스트업
+- main kick: 카카오맵 api를 활용한 브루어리 위치 찾기
 
 
 ## Deploy(임시)
-[Brewhere](http://macduck-brewhere.s3-website.ap-northeast-2.amazonaws.com/)
+[Brewhere](https://client.brewhere.click/)
