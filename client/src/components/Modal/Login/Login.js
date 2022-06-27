@@ -90,9 +90,13 @@ function Login({ setUserinfo }) {
     setModalIsOpen(!modalIsOpen);
   };
 
-  // 카카오 로그인 관련
-
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&response_type=code`;
+  const kakaoLoginHandler = (e) => {
+    e.preventDefault();
+    window.location.assign(
+      `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=code`
+    );
+  };
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=code`;
 
   const onClickSubmit = () => {
     const { userEmail, password } = loginInfo;
@@ -180,9 +184,7 @@ function Login({ setUserinfo }) {
             >
               로그인
             </button>
-            <a href={KAKAO_AUTH_URL}>
-              <div className='kakao_btn'></div>
-            </a>
+            <div className='kakao_btn' onClick={kakaoLoginHandler}></div>
             <br />
             <div className='signup-text'>
               아이디가 없으신가요 ?

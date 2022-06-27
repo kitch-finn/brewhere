@@ -4,8 +4,6 @@ import Nav from './components/Nav/Nav';
 import Home from './pages/Home';
 import Map from './pages/Map';
 import Mypage from './pages/Mypage';
-import KakaoRedirectHandler from './components/Kakao/KakaoRedirectHandeler';
-import KakaoMypage from './components/Kakao/KakaoMypage';
 import LoginModal from './components/Modal/Login/Login';
 import './App.css';
 
@@ -25,17 +23,7 @@ function App() {
             element={<Mypage />}
             userinfo={userinfo}
           />
-          <Route
-            path='/oauth/callback/kakao'
-            component={KakaoRedirectHandler}
-            element={<KakaoMypage />}
-          />
-          <Route path='/kakao/mypage' element={<KakaoMypage />} />
-          <Route
-            element={LoginModal}
-            setUserinfo={setUserinfo}
-            // handleResponseSuccess={handleResponseSuccess}
-          />
+          <Route element={LoginModal} setUserinfo={setUserinfo} />
         </Routes>
       </BrowserRouter>
     </div>
