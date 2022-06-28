@@ -1,50 +1,56 @@
-import React from "react";
-import { useEffect } from "react";
-import axios from "axios";
-import qs from "qs";
-import { useHistory } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const KakaoAuth = () => {
-  const REST_API_KEY = "[본인 REST API KEY 값]";
-  const REDIRECT_URI = "http://localhost:3000/oauth/kakao/callback";
-  const CLIENT_SECRET = "[본인 CLIENT SECRET 값]";
+import ConfirmModal from '../Modal/ConfirmModal';
+// import Loading from '../../utils/LoadingIndicator';
 
-  // calllback으로 받은 인가코드
-  const code = new URL(window.location.href).searchParams.get("code");
+const KakaoOauth = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMsg, setModalMsg] = useState('');
 
-  const history = useHistory();
-
-  const getToken = async () => {
-    const payload = qs.stringify({
-      grant_type: "authorization_code",
-      client_id: REST_API_KEY,
-      redirect_uri: REDIRECT_URI,
-      code: code,
-      client_secret: CLIENT_SECRET,
-    });
-
-    try {
-      // access token 가져오기
-      const res = await axios.post(
-        "https://kauth.kakao.com/oauth/token",
-        payload
-      );
-      
-      // Kakao Javascript SDK 초기화
-      window.Kakao.init(REST_API_KEY);
-      // access token 설정
-      window.Kakao.Auth.setAccessToken(res.data.access_token);
-      history.replace("/kakao/mypage");
-    } catch (err) {
-      console.log(err);
-    }
+  const modalHandler = () => {
+    setModalOpen(false);
   };
 
   useEffect(() => {
-    getToken();
+    const code = new URL(window.location.href).searchParams.get('code');
+    if (code) {
+      kakao(code);
+    }
   }, []);
 
-  return null;
+  const kakao = (code) => {
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/oauth/callback/kakao?code=${code}`,
+        { authorizationCode: `Bearer ${code}` },
+        {
+          headers: {
+            Authorization: `Bearer ${code}`,
+          },
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        if (res.data.token) {
+          setModalOpen(true);
+          setModalMsg('카카오 로그인 되었습니다!');
+          // setLoading(false);
+        } else {
+          setModalOpen(true);
+          setModalMsg('카카오 로그인에 실패하였습니다');
+          // setLoading(false);
+        }
+      });
+  };
+
+  return (
+    <>
+      {modalOpen ? (
+        <ConfirmModal handleModal={modalHandler}>{modalMsg}</ConfirmModal>
+      ) : null}
+    </>
+  );
 };
 
-export default KakaoAuth;
+export default KakaoOauth;

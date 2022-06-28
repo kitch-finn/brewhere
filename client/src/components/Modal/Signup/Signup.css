@@ -7,11 +7,9 @@
   top: 1rem;
   right: 3rem;
   font-size: 3rem;
-  width: 4rem;
-  height: 4rem;
   text-align: center;
   cursor: pointer;
-  color: #000
+  color: #000;
 }
 
 .modal-signup-logo {
@@ -37,13 +35,13 @@
 .validate-text {
   font-size: 1rem;
   font-family: 'Noto Sans KR';
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .signup-btn {
   width: 10rem;
   padding: 0.5rem;
-  background: #DF9632;
+  background: #df9632;
   color: #fff;
   border-radius: 10px;
 }
