@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const path = require('path');
 
+// const authRouter = require('./router/authRouter.js');
 const usersRouter = require('./router/usersRouter.js');
 const breweryRouter = require('./router/breweryRouter.js');
 const mypageRouter = require('./router/mypageRouter.js');
@@ -42,6 +43,7 @@ sequelize
   });
 //데이터베이스 연결 위해 추가
 
+// app.use('/auth', authRouter);
 app.use('/users', usersRouter);
 app.use('/:breweryid', breweryRouter);
 app.use('/mypage', mypageRouter);

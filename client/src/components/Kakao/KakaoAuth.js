@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import ConfirmModal from '../Modal/ConfirmModals';
+import ConfirmModal from '../Modal/ConfirmModal';
 // import Loading from '../../utils/LoadingIndicator';
 
 const KakaoOauth = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMsg, setModalMsg] = useState('');
-  const [loading, setLoading] = useState(false);
 
   const modalHandler = () => {
     setModalOpen(false);
   };
+
   useEffect(() => {
     const code = new URL(window.location.href).searchParams.get('code');
     if (code) {
@@ -22,25 +22,17 @@ const KakaoOauth = () => {
   const kakao = (code) => {
     axios
       .post(
-        `${process.env.REACT_APP_API_URL}/users/oauth/kakao/callback?code=${code}`,
-        { data: code },
+        `${process.env.REACT_APP_API_URL}/oauth/callback/kakao?code=${code}`,
+        { authorizationCode: `Bearer ${code}` },
         {
           headers: {
-            authorization: code,
+            Authorization: `Bearer ${code}`,
           },
           withCredentials: true,
         }
       )
       .then((res) => {
         if (res.data.token) {
-          if (
-            localStorage.getItem('guest') ||
-            localStorage.getItem('first-guest')
-          ) {
-            localStorage.removeItem('guest');
-            localStorage.removeItem('first-guest');
-          }
-          localStorage.setItem('kakao', res.data.token);
           setModalOpen(true);
           setModalMsg('카카오 로그인 되었습니다!');
           // setLoading(false);
@@ -54,7 +46,6 @@ const KakaoOauth = () => {
 
   return (
     <>
-      {loading ? <Loading /> : null}
       {modalOpen ? (
         <ConfirmModal handleModal={modalHandler}>{modalMsg}</ConfirmModal>
       ) : null}

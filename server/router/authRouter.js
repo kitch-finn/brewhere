@@ -1,7 +1,8 @@
-// const express = require('express');
-// const router = express.Router();
-// let { authController } = require('../controllers/auth/kakaoLogin');
+const express = require('express');
+const router = express.Router();
+let authController = require('../controllers/kakaoLogin');
 
-// router.post('/oauth', authController);
+router.get('/oauth/callback/kakao', authController);
+router.post('/oauth/callback/kakao', authController);
 
-// module.exports = router;
+module.exports = router;
